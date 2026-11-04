@@ -3,7 +3,6 @@
 from ... import configuracion
 from . import materias, superposiciones
 
-
 def buscarHorarios(oferta, materia, comision):
     horarios = horariosDeMateria(oferta, materia)
     materiasEncontradas = materias.valoresDistintos(horarios, configuracion.POSICION_MATERIA)

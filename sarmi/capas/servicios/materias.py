@@ -1,6 +1,6 @@
-from ... import configuracion
-from ..utilidades import listas, textos
-
+from ..utilidades.textos import contiene, normalizar, extraerNumero
+from ..utilidades.listas import esta
+from ...configuracion import POSICION_MATERIA, POSICION_COMISION
 
 def valoresDistintos(horarios, posicion):
     """Recibe una lista de horarios y una posición (ver POSICION_... en configuracion.py).
@@ -8,7 +8,14 @@ def valoresDistintos(horarios, posicion):
     Devuelve la lista de esos valores, en el orden en que aparecen.
     Ejemplo: con los horarios de Introducción a la Programación y POSICION_COMISION,
     devuelve ["COM-01", "COM-02", "COM-03", ...]."""
-    return []
+
+    distintos = []
+    for horario in horarios:
+        valor = horario[posicion]
+        if valor not in distintos:
+            distintos.append(valor)
+    return distintos
+    
 
 
 def buscarMateria(oferta, nombre):
@@ -17,7 +24,13 @@ def buscarMateria(oferta, nombre):
     Devuelve la lista de esos horarios, o una lista vacía si no hay ninguno.
     Ejemplo: buscarMateria(oferta, "programacion") devuelve los horarios de Introducción a la
     Programación, Programación I, Programación II y otras."""
-    return []
+
+    resultados = []
+    for horario in oferta:
+        materia = horario[POSICION_MATERIA]
+        if contiene(materia, nombre):
+            resultados.append(horario)
+    return resultados
 
 
 def filtrarMateriaExacta(horarios, nombre):
@@ -26,8 +39,16 @@ def filtrarMateriaExacta(horarios, nombre):
     Devuelve la lista de esos horarios, o una lista vacía si no hay ninguno.
     Ejemplo: si están los horarios de Programación I y de Programación II, con "programación i"
     devuelve solo los de Programación I."""
-    return []
 
+    resultados = []
+    nombre_norm = normalizar(nombre)
+    for horario in horarios:
+        materia_norm = normalizar(horario[POSICION_MATERIA])
+        if materia_norm == nombre_norm:
+            resultados.append(horario)
+    return resultados
+
+    
 
 def filtrarPorComision(horarios, comision):
     """Recibe una lista de horarios y una comisión, escrita como sea ("7", "07", "COM-07" o "comisión 7").
@@ -35,4 +56,15 @@ def filtrarPorComision(horarios, comision):
     Devuelve la lista de esos horarios, o una lista vacía si no hay ninguno.
     Ejemplo: con los horarios de Introducción a la Programación y "7", devuelve los dos horarios
     de la COM-07: el del viernes y el virtual."""
-    return []
+    
+    num_buscado = extraerNumero(str(comision))
+    resultados = []
+    for horario in horarios:
+        comision_actual = horario[POSICION_COMISION]
+        num_actual = extraerNumero(comision_actual)
+    
+        if num_buscado != -1 and num_buscado == num_actual:
+            resultados.append(horario)
+        elif normalizar(str(comision)) == normalizar(comision_actual):
+            resultados.append(horario)
+    return resultados
