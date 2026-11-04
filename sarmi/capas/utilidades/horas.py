@@ -1,4 +1,3 @@
-MINUTOS_POR_HORA = 60
 
 
 def horaAMinutos(hora):
@@ -6,9 +5,11 @@ def horaAMinutos(hora):
     Calcula cuántos minutos pasaron desde las 00:00.
     Devuelve esa cantidad de minutos.
     Ejemplo: horaAMinutos("18:30") devuelve 1110."""
+
     partes = hora.split(":")
     horas_enteras = int(partes[0])
     minutos_enteros = int(partes[1])
     
-    total_minutos = (horas_enteras * MINUTOS_POR_HORA) + minutos_enteros
+    total_minutos = (horas_enteras * 60) + minutos_enteros
+
     return total_minutos

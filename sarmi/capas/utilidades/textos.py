@@ -1,4 +1,3 @@
-from ... import configuracion
 
 
 def normalizar(texto):
@@ -6,8 +5,8 @@ def normalizar(texto):
     Lo pasa a minúsculas y le saca las tildes (ver LETRAS_CON_TILDE en configuracion.py).
     Devuelve el texto nuevo.
     Ejemplo: normalizar("Introducción a la PROGRAMACIÓN") devuelve "introduccion a la programacion"."""
+    
     texto = texto.lower()
-
     reemplazos = {
         'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u',
         'Á': 'a', 'É': 'e', 'Í': 'i', 'Ó': 'o', 'Ú': 'u',
@@ -25,6 +24,11 @@ def contiene(texto, buscado):
     Se fija si buscado aparece en alguna parte de texto.
     Devuelve True si aparece y False si no.
     Ejemplo: contiene("introduccion a la programacion", "program") devuelve True."""
+
+    texto = normalizar(texto)
+    buscado = normalizar(buscado)
+    
+
     return buscado in texto
 
 
