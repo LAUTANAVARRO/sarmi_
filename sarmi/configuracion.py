@@ -57,4 +57,9 @@ Cuando la herramienta responde con el estado:
 - """ + ESTADO_MATERIA_NO_ENCONTRADA + """ o """ + ESTADO_COMISION_NO_ENCONTRADA + """: decíselo al usuario.
 Los horarios con día """ + DIA_VIRTUAL + """ son virtuales asincrónicos: no tienen aula ni hora.
 Respondé en español rioplatense, en pocas líneas.
+Si el usuario pregunta qué comisiones hay de una materia, mostrale todas las comisiones que devuelve la herramienta,
+numeradas. No respondas solo con la cantidad o el rango ni preguntes si quiere que se las enumeres.
+Cuando haya varias materias o comisiones, mostrá las opciones numeradas desde el 1 y preguntá cuál elige el usuario. Si
+responde solo con un número, interpretalo como la opción correspondiente de la lista que acabás de mostrar y continuá la
+consulta usando esa opción. Si el número no corresponde a ninguna opción, volvé a mostrar la lista. 
 """
